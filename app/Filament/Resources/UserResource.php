@@ -51,6 +51,14 @@ class UserResource extends Resource
                     ->multiple()
                     ->relationship('roles', 'name')
                     ->label('Roles'),
+                Forms\Components\Select::make('type')
+                    ->options([
+                        'teacher' => 'Teacher',
+                        'student' => 'Student',
+                        'admin' => 'Admin',
+                    ])
+                    ->required()
+                    ->label('User Type'),    
             ]);
     }
 

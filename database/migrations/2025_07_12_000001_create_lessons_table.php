@@ -11,7 +11,15 @@ return new class extends Migration {
             $table->string('title');
             $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade');
             $table->text('description')->nullable();
-            $table->date('date')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
+            $table->string('lesson_days')->nullable();
+            $table->enum('lesson_type',['online','offline'])->nullable();
+            $table->enum('lesson_frequnse',['dayile','manthely','weekly'])->nullable();
+            //$table->string('lesson_location')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }
