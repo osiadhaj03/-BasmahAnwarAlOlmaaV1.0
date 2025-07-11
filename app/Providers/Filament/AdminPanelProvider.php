@@ -86,6 +86,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->middleware([
                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
+ 
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
@@ -101,7 +102,14 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                \Hasnayeen\Themes\ThemesPlugin::make(),
+                 \Hasnayeen\Themes\ThemesPlugin::make()
+                    ->canViewThemesPage(fn() => auth()->user()?->can('viewThemes'))
+                    ->registerTheme([
+                      \Hasnayeen\Themes\Themes\Dracula::class,
+                      \Hasnayeen\Themes\Themes\Nord::class,
+                      \Hasnayeen\Themes\Themes\Sunset::class,
+                    ], override: true),
+
                 \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make()
                     ->allowSubFolders(),
                 \BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin::make(),
