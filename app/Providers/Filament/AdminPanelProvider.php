@@ -70,7 +70,7 @@ class AdminPanelProvider extends PanelProvider
                     ->group(__('menu.nav_group.activities'))
                     ->sort(99),
             ])
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            //->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->resources([
                 config('filament-logger.activity_resource')
