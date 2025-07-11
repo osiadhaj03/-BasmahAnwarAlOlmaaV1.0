@@ -12,4 +12,14 @@ class LessonStudent extends Model
         'lesson_id',
         'student_id',
     ];
+
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class, 'lesson_id');
+    }
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
+    
 }

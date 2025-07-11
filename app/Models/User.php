@@ -24,4 +24,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'type', // 'teacher' or 'student'
+    ];
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class, 'teacher_id');
+    }
+    public function students()
+    {
+        return $this->belongsToMany(Lesson::class, 'lesson_student', 'student_id', 'lesson_id');
+    }
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'student_id');
+    }
+    public function isTeacher()
+    {
+        return $this->type === 'teacher';
+    }
+    public function isStudent()
+    {
+        return $this->type === 'student';   
+    }
+
+    
 }

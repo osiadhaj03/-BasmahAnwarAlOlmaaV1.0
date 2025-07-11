@@ -11,5 +11,20 @@ class Lesson extends Model
         'title',
         'description',
         'date',
+        
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'lesson_student', 'lesson_id', 'student_id');
+    }
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
 }
